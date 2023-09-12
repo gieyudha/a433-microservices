@@ -1,0 +1,28 @@
+# Menetapkan schema version
+version: "3.7"
+
+# Pendefinisian service yang akan dibuat
+services:
+  # Mendefinisikan service pertama item-db
+  item-db:
+    # mendefinisikan image yang dipakai mongo:3
+    image: mongo:3
+    # Menetapkan volume app-db yang di mount ke /data/db
+    volumes:
+      - app-db:/data/db
+    # Memerintahkan service akan selalu restart jika container berhenti
+    restart: always
+
+  # Mendefinisikan service kedua item-app
+  item-app:
+    # mendefinisikan image yang dipakai item-app:v1 yang di pull dari github package
+    image: "ghcr.io/gieyudha/item-app:v1"
+    # Melakukan mapping port 8080 (container) ke port 80 (host)
+    ports:
+      - 80:8080
+    # Memerintahkan service akan selalu restart jika container berhenti
+    restart: always
+
+# Mendefinisikan pembuatan volume app-db
+volumes:
+  app-db:
