@@ -20,6 +20,9 @@ services:
     # Melakukan mapping port 8080 (container) ke port 80 (host)
     ports:
       - 80:8080
+    # Menjalankan item-app setelah item-db berjalan
+    depends_on:
+      - item-db
     # Memerintahkan service akan selalu restart jika container berhenti
     restart: always
 
